@@ -2,9 +2,13 @@ import java.util.Scanner;
 
 public class MaxSumSubArrayBF {
 
-    // Brute Force Approach
+    // ============================================================
+    // PART 1: BRUTE FORCE APPROACH
     // Time Complexity: O(n^3)
     // Space Complexity: O(1)
+    // ============================================================
+
+    /*
     public static int subarrays(int[] arr) {
 
         int maxSum = Integer.MIN_VALUE;
@@ -31,6 +35,40 @@ public class MaxSumSubArrayBF {
 
         return maxSum;
     }
+    */
+
+
+    // ============================================================
+    // PART 2: OPTIMIZED BRUTE FORCE APPROACH
+    // Time Complexity: O(n^2)
+    // Space Complexity: O(1)
+    // ============================================================
+
+    public static int subarrays(int[] arr) {
+
+        int maxSum = Integer.MIN_VALUE;
+        int n = arr.length;
+
+        // First loop: Choose the starting index
+        for (int si = 0; si < n; si++) {
+
+            int currSum = 0;
+
+            // Second loop: Choose the ending index
+            for (int ei = si; ei < n; ei++) {
+
+                // Instead of calculating the whole sum again,
+                // add the new element to the previous sum
+                currSum += arr[ei];
+
+                // Update maximum sum
+                maxSum = Math.max(maxSum, currSum);
+            }
+        }
+
+        return maxSum;
+    }
+
 
     public static void main(String[] args) {
 
@@ -49,7 +87,7 @@ public class MaxSumSubArrayBF {
             arr[i] = sc.nextInt();
         }
 
-        // Call the Brute Force method
+        // Call the optimized method
         int maxSum = subarrays(arr);
 
         // Display the result
