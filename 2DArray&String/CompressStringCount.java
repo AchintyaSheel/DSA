@@ -20,10 +20,10 @@ public class CompressStringCount {
             else{
                 //If count is greater than 1,then only add it to the final res string
                 if(count>1){
-                    res+=count;
+                    res+=count;//adding count for last character
                 }
-                    res+=str.charAt(i);
-                    count=1;
+                    res+=str.charAt(i);//adding next character,count of which will be added later
+                    count=1;//reinitializing count with 1 for new character
             }
         } 
         return res;
