@@ -64,6 +64,7 @@ public class TransposeMatrix {
             }
         }
         transpose(arr);
+        sc.close();
 
     }
     
