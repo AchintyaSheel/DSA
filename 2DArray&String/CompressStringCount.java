@@ -26,6 +26,10 @@ public class CompressStringCount {
                     count=1;//reinitializing count with 1 for new character
             }
         } 
+        //if the last element is repeated,to print its count,below written part is used
+        if(count>1){
+            res+=count;
+        }
         return res;
     }
     public static void main(String[]args){
