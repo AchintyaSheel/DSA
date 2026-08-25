@@ -22,6 +22,8 @@ public class CompressString {
         String str=sc.next();
         System.out.print(Compress(str));
 
+        sc.close();
+
     }
     
 }
