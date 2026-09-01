@@ -33,7 +33,7 @@ There are approximately y recursive calls.
 Hence:
 Space Complexity = O(y)
 */
-//Approach-1
+/*Approach-1
     public class power {
     public static int pow(int x,int y){
          //4)Solving for the smallest problem(Base case)
