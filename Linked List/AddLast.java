@@ -28,9 +28,8 @@ public Node(int data) {
         // val ki value ka ek naya Node banao
         Node newNode = new Node(val);
 
-        // Agar head aur tail same hain
-        // iska matlab list empty hai
-        if (head == tail) {
+       // Agar head null hai, matlab LinkedList empty hai
+        if (head == null) {
 
             // New Node hi first Node banega
             head = newNode;
