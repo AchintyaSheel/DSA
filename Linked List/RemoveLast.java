@@ -56,7 +56,7 @@ public class RemoveLast {
         tail = temp;
 
         // One node was removed
-        size--;
+        this.size--;
     }
 }
 
