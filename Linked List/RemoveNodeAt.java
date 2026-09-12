@@ -71,37 +71,84 @@ public class RemoveNodeAt {
         this.size++;
     }
 
-     public void removeFirst() {
+    // Removes the first node from the LinkedList
+    public void removeFirst() {
 
-    // If head is null, there is no node to remove
-    if (head == null) {
-        System.out.println("No node to remove, Linked List is empty");
+        // If head is null, there is no node to remove
+        if (head == null) {
+            System.out.println("No node to remove, Linked List is empty");
+        }
+
+        // If head and tail are the same,
+        // it means there is only one node
+        else if (head == tail) {
+
+            // Remove the only node
+            head = null;
+            tail = null;
+        }
+
+        // If there are more than one nodes
+        else {
+            // Store the second node (head's next node)
+            // in a temporary variable
+            Node headKaNext = head.next;
+
+            // Make the second node the new head
+            // So the old first node is removed
+            head = headKaNext;
+
+            // One node was removed
+            this.size--;
+        }
     }
 
-    // If head and tail are the same,
-    // it means there is only one node
-    else if (head == tail) {
+    // Removes the last node from the LinkedList
+    public void removeLast() {
 
-        // Remove the only node
-        head = null;
-        tail = null;
+        // If head is null, there is no node to remove
+        if (head == null) {
+            System.out.println("No node to remove, Linked List is empty");
+        }
+
+        // If head and tail are the same,
+        // it means there is only one node
+        else if (head == tail) {
+
+            // Remove the only node
+            head = null;
+            tail = null;
+        }
+
+        // If there are more than one nodes
+        else {
+
+            // Start from the first node
+            Node temp = head;
+
+            // Move temp until it reaches
+            // the node just before the last node
+            while (temp.next != tail) {
+
+                // Go to the next node
+                Node tempKaNext = temp.next;
+                temp = tempKaNext;
+            }
+
+            // Remove the last node by making
+            // the second-last node point to null
+            temp.next = null;
+
+            // Now second-last node becomes the new tail
+            tail = temp;
+
+            // One node was removed
+            this.size--;
+        }
     }
 
-    // If there are more than one nodes
-    else {
-        // Store the second node (head's next node)
-        // in a temporary variable
-        Node headKaNext=head.next;
-        // Make the second node the new head
-        // So the old first node is removed
-        head=headKaNext; 
-
-        // One node was removed
-        this.size--;
-    }
-}
-    // Adds a new node at the given index
-    public void removeNodeAt(int idx, int val) {
+    // Removes the node at the given index
+    public void removeNodeAt(int idx) {
 
         // Check whether the given index is valid
         if (idx < 0 || idx > size) {
@@ -111,34 +158,45 @@ public class RemoveNodeAt {
             return;
         }
 
-        // If index is 0, add the node at the beginning
-        else if (idx == 0) {
+        // If index is 0, remove the node at the beginning
+        if (idx == 0) {
 
-            // Call addFirst() because index 0 means first position
-            removeFirst(val);
+            // Call removeFirst() because index 0 means first position
+            removeFirst();
             return;
         }
 
-        // Create a new node with the given value
-        Node newNode = new Node(val);
+        // If index is equal to size,
+        // call removeLast() to remove the last node
+        else if (idx == size) {
 
-        // Get the node just before the position where we want to insert
-        Node prevNode = getNodeAt(idx - 1);
+            // Call removeLast() because index size means last position
+            removeLast();
+            return;
+        }
 
-        // Store the node that currently comes after prevNode
-        Node nextNode = prevNode.next;
+        // For removing a node from the middle
+        else {
 
-        // Break the connection between prevNode and nextNode
-        prevNode.next = null;
+            // Get the node just before the node we want to remove
+            Node previousNode = getNodeAt(idx - 1);
 
-        // Connect prevNode to the new node
-        prevNode.next = newNode;
+            // Get the node that we want to delete
+            Node nodeToDelete = previousNode.next;
 
-        // Connect the new node to nextNode
-        newNode.next = nextNode;
+            // Store the node that comes after the node to delete
+            Node nextNode = nodeToDelete.next;
 
-        // Increase the size by 1
-        this.size++;
+            // Break the connection between previousNode and nodeToDelete
+            previousNode.next = null;
+
+            // Connect previousNode directly to nextNode
+            // This removes nodeToDelete from the LinkedList
+            previousNode.next = nextNode;
+        }
+
+        // Decrease the size by 1
+        this.size--;
 
     }
 
@@ -176,11 +234,11 @@ public class RemoveNodeAt {
 }
 
 // Main class
-class AddNextAtMain {
+class RemoveNodeAtMain {
     public static void main(String[] args) {
 
         // Create a LinkedList object
-        AddNodeAt ll = new AddNodeAt();
+        RemoveNodeAt ll = new RemoveNodeAt();
 
         // Add elements to the LinkedList
         ll.addLast(10);
@@ -192,31 +250,20 @@ class AddNextAtMain {
         // Display the complete LinkedList
         ll.displayList();
 
-        // Add 5 at index 2
-        // Before: 10 -> 20 -> 30 -> 40 -> 50
-        // After:  10 -> 20 -> 5 -> 30 -> 40 -> 50
-        ll.addNodeAt(2, 5);
-
-        // Display the list after insertion
+        // Remove the node at index 2
+        // 10 -> 20 -> 30 -> 40 -> 50
+        // 10 -> 20 -> 40 -> 50
+        ll.removeNodeAt(2);
         ll.displayList();
 
-        // Add 33 at index 4
-        // Inserts 33 between the nodes at index 3 and index 4
-        ll.addNodeAt(4, 33);
-
-        // Display the list after insertion
+        // Try to remove the node at index 4
+        ll.removeNodeAt(4);
         ll.displayList();
 
-        // Try to add 1 at index 55
-        // Since 55 is greater than the current size,
-        // the index is invalid and an error message is printed
-        ll.addNodeAt(55, 1);
-
-        // Display the list
+        // Try to remove the node at index 10
+        // Since this index is out of bounds, an error is displayed
+        ll.removeNodeAt(10);
         ll.displayList();
-
+        
     }
 }
-
-    
-
