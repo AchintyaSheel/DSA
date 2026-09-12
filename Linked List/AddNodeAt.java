@@ -111,12 +111,18 @@ public class AddNodeAt {
         }
 
         // If index is 0, add the node at the beginning
-        else if (idx == 0) {
+        if (idx == 0) {
 
             // Call addFirst() because index 0 means first position
             addFirst(val);
             return;
         }
+        //If index is size i.e. the last node of the LinkedList
+        else if(idx == size){
+            // Call addLast() because index size means last position
+            addLast(val);
+            return;
+        } 
 
         // Create a new node with the given value
         Node newNode = new Node(val);
