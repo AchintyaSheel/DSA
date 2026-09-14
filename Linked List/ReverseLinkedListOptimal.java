@@ -11,7 +11,7 @@ public class ReverseLinkedListOptimal{
             // next by default null hota hai
         }
     }
-
+    
     Node head;      // LinkedList ka first Node
     Node tail;      // LinkedList ka last Node
     int size;       // LinkedList mein total Nodes ki count
